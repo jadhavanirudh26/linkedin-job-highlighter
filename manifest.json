@@ -1,0 +1,16 @@
+{
+    "manifest_version": 3,
+    "name": "LinkedIn Applied Job Highlighter",
+    "version": "1.0",
+    "description": "Highlights jobs you've already applied to on LinkedIn in red.",
+    "permissions": ["scripting", "activeTab"],
+    "content_scripts": [
+      {
+        "matches": ["https://www.linkedin.com/jobs/*"],
+        "js": ["content.js"]
+      }
+    ],
+    "icons": {
+      "48": "icon.png"
+    }
+  }
