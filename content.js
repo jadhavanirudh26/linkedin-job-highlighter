@@ -1,38 +1,37 @@
-// Run this script whenever the LinkedIn jobs page is loaded or refreshed
 const highlightAppliedJobs = () => {
-    console.log("Highlighting applied jobs...");
-  
-    // Select all job cards dynamically
-    document.querySelectorAll(".job-card-container").forEach((jobCard) => {
-      const jobCardText = jobCard.innerText.toLowerCase(); // Get the card's text
-  
-      // Check if it contains the "Applied" label (case-insensitive)
-      if (jobCardText.includes("applied")) {
-        console.log("Found an applied job:", jobCardText);
-        
-        // Highlight the job card
-        jobCard.style.border = "2px solid red"; // Add a red border
-        jobCard.style.backgroundColor = "#ffe6e6"; // Light red background
-      }
+  console.log("Highlighting applied jobs...");
 
-      // Check if the job is "Viewed"
-      if (jobCardText.includes("viewed")) {
-        console.log("Found a viewed job:", jobCardText);
-  
-        // Highlight the job card for "Viewed"
-        jobCard.style.border = "2px solid blue"; // Blue border for viewed jobs
-        jobCard.style.backgroundColor = "#e6f2ff"; // Light blue background
+  document.querySelectorAll(".job-card-job-posting-card-wrapper").forEach((jobCard) => {
+    const footerItems = jobCard.querySelectorAll(
+      ".job-card-job-posting-card-wrapper__footer-item.t-bold"
+    );
+
+    footerItems.forEach((item) => {
+      const text = item.innerText.toLowerCase();
+
+      if (text.includes("applied")) {
+        jobCard.style.border = "2px solid red";
+        jobCard.style.backgroundColor = "#ffe6e6";
+        console.log("Applied job highlighted.");
+      } else if (text.includes("viewed")) {
+        jobCard.style.border = "2px solid blue";
+        jobCard.style.backgroundColor = "#e6f2ff";
+        console.log("Viewed job highlighted.");
+      } else if (text.includes("saved")) {
+        jobCard.style.border = "2px solid green";
+        jobCard.style.backgroundColor = "#e6ffe6";
+        console.log("Saved job highlighted.");
       }
     });
-  };
-  
-  // Observe DOM changes to handle LinkedIn's dynamic loading (infinite scrolling)
-  const observer = new MutationObserver(() => {
-    highlightAppliedJobs(); // Run the highlight function when the DOM changes
   });
-  
-  observer.observe(document.body, { childList: true, subtree: true });
-  
-  // Initial run
+};
+
+// Observer to handle LinkedIn's dynamic loading
+const observer = new MutationObserver(() => {
   highlightAppliedJobs();
-  
+});
+
+observer.observe(document.body, { childList: true, subtree: true });
+
+// Initial call
+highlightAppliedJobs();
