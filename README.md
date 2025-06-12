@@ -5,7 +5,7 @@ A Chrome extension to improve your LinkedIn job search experience by highlightin
 ---
 
 ## Features
-- Highlights **applied** jobs in red.
+- Highlights **applied** jobs in green.
 - Highlights **viewed** jobs in a different color (e.g., blue or yellow).
 - Simple, lightweight, and easy to use.
 - Fully client-side, ensuring your data stays private.
